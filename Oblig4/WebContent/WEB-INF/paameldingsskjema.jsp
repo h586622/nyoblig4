@@ -19,6 +19,7 @@
                 <label for="fornavn">Fornavn:</label> <input type="text"
                     name="fornavn" id="fornavn"
                     onkeypress="fornavnSjekk()" /> <font color="red" id="fn"></font>
+                   
             </div>
             <div class="pure-control-group">
                 <label for="etternavn">Etternavn:</label> <input type="text"

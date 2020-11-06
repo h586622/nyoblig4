@@ -36,7 +36,7 @@
         <c:when test="${deltager.getMobilnummer()==aktuell}">
         <td style="background-color:lightgreen;"><c:out value="${deltager.getFornavn()} ${deltager.getEtternavn()}" /> </td> 
         <td style="background-color:lightgreen;"><c:out value="${deltager.getMobilnummer()}" /></td>
-        </c:when>
+        </c:when> 
         <c:otherwise>
             <td><c:out value="${deltager.getFornavn()} ${deltager.getEtternavn()}" /> </td> 
             <td><c:out value="${deltager.getMobilnummer()}" /></td>

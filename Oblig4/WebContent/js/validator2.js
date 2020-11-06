@@ -4,25 +4,27 @@ class validator2 {
     constructor(root){
         this.root = root;
         this.run = this.run.bind(this);
+        this.rootElement = document.getElementById(this.root);
     }
     
     run(){
-         this.rootElement = document.getElementById(this.root);
+         
+         root.querySelector("form")
          
          this.fornavn = this.rootElement.querySelector('input[id="fornavn"]');
-         this.fornavn.addEventListener("input", this.fornavnSjekk());
+         this.fornavn.addEventListener("input", fornavnSjekk);
          
          this.etternavn = this.rootElement.querySelector('input[id="etternavn"]');
-         this.etternavn.addEventListener("input", this.etternavnSjekk());
+         this.etternavn.addEventListener("input", etternavnSjekk);
            
          this.mobil = this.rootElement.querySelector('input[id="mobil"]');
-         this.mobil.addEventListener("input", this.mobilSjekk());
+         this.mobil.addEventListener("input", mobilSjekk);
              
          this.passord = this.rootElement.querySelector('input[id="passord"]');
-         this.passord.addEventListener("input", this.passordSjekk());
+         this.passord.addEventListener("input", passordSjekk);
              
          this.passordRepetert = this.rootElement.querySelector('input[id="passordRepetert"]');
-         this.fornavn.addEventListener("input", this.passordLikt());
+         this.fornavn.addEventListener("input", passordLikt); 
     }
 }
 
@@ -30,12 +32,16 @@ class validator2 {
 function fornavnSjekk(){
     if (fornavn.value.match("^[A-ZÆØÅ][A-Za-zÆØÅæøå\\-]{2,19}$")){
         fornavn.style.borderColor = "green"
+        fornavn.classList.remove("formcontroller_invalidInput")
+        fornavn.classList.add("formcontroller_validInput")
         }
         else{
          fornavn.style.borderColor = "red"  
-         //deltagerForm.fornavnMelding = "feil fornavn"
+          fornavn.classList.remove("formcontroller_validInput")
+         fornavn.classList.add("formcontroller_invalidInput")
+         
         }
-    console.log("fornavn");
+  
 }
 
 function etternavnSjekk(){
@@ -44,11 +50,11 @@ function etternavnSjekk(){
     else{
         etternavn.style.borderColor = "red"
     }
-    console.log("Etternavn");
+  
 }
 
 function mobilSjekk(){
-    if (mobil.value.match("^[\\d]{7}$")) {
+    if (mobil.value.match("^[\\d]{8}$")) {
     mobil.style.borderColor = "green"
     }else{
         mobil.style.borderColor = "red"
@@ -59,27 +65,30 @@ function mobilSjekk(){
 function passordSjekk(){
    if (passord.value.match("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")) {
     passord.style.borderColor = "green"
+    passord.style.backgroundColor= "lightgreen"
     }else{
-      passord.style.borderColor = "red"  
+      passord.style.borderColor = "red" 
+      passord.style.backgroundColor= "pink"
     }
     console.log("passord");
 }
 
 function passordLikt(){
-   if (passordRep.value === passord.value) {
-    passordRep.style.borderColor = "green"
+   if (passordRepetert.value === passord.value){
+    passordRepetert.style.borderColor = "green"
     }else{
-        passordRep.style.borderColor = "red"
+        passordRepetert.style.borderColor = "red"
     }
-    console.log("passordLikt");
+    
 }
 
 function musOver(){
-    console.log("mouseover");
+
+     
 }
 
  // const rootElement = document.getElementById("root")
-const validator = new validator2("validator")
+const validator = new validator2("root")
 
 document.addEventListener("DOMContentLoaded", validator.run)
 

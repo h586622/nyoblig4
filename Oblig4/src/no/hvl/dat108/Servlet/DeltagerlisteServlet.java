@@ -1,7 +1,11 @@
 package no.hvl.dat108.Servlet;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import static no.hvl.dat108.UrlMappings.LOGIN_URL;
 
 import javax.ejb.EJB;
@@ -36,13 +40,19 @@ public class DeltagerlisteServlet extends HttpServlet {
 		else {
 
 			List<Deltager> deltagerliste = deltagerDAO.hentAlleDeltagere();
+			
+		    Collections.sort(deltagerliste, new Comparator<Deltager>() {
+	            @Override
+	            public int compare(Deltager o1, Deltager o2) {
+	                return o1.getEtternavn().compareTo(o2.getEtternavn());
+	            }});
 
 			request.setAttribute("deltagerliste", deltagerliste);
-			String aktuell = (String) sesjon.getAttribute("mobil");
+			String aktuell = String.valueOf(sesjon.getAttribute("mobil"));
 			request.setAttribute("aktuell", aktuell);
-			System.out.println(aktuell);
+			System.out.println(aktuell); 
 
-			request.getRequestDispatcher("WEB-INF/deltagerliste.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/deltagerliste.jsp").forward(request, response); 
 		}
 	}
 

@@ -26,3 +26,7 @@
     /* lyserød */    
     background-color: rgb(255, 200, 200)
 }
+
+.formcontroller_hidden {
+	display: none;
+}

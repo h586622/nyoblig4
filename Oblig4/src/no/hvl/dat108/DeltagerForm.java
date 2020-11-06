@@ -30,6 +30,5 @@ public class DeltagerForm {
 		this.passordRepetertMelding = "Må være likt som passord";
 	}
 	
-	
 
 }
