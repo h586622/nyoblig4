@@ -14,7 +14,7 @@ public class InputSjekk {
     
     public static boolean passordSjekk(String passord) {
 	
-    	String pattern = "((?=.[a-z])(?=.\\d)(?=.[A-Z])(?=.[@#$%!]).{8,40})";
+    	String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&^+=]).{6,20}$";
     	return passord.matches(pattern);
   	  
   	  //"^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})" original kode
@@ -24,6 +24,8 @@ public class InputSjekk {
   	  // ^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[!@#&()–[{}]:;',?/*~$^+=<>]).{6,20}$ nytt forsøk
   	  
   	  // ^.(?=.{8,})(?=.\d)(?=.[a-zA-Z])|(?=.{8,})(?=.\d)(?=.[!@#$%^&])|(?=.{6,})(?=.[a-zA-Z])(?=.[!@#$%^&]).$ 2 av 3
+    	
+    //  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&^+=]).{6,20}$"	egenlaget
     }
 	
 }

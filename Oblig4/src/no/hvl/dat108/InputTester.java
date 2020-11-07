@@ -30,12 +30,12 @@ class InputTester {
 	}
 	@Test
 	void testPassord() {
-		String passord1 = "!123Erikkk";
+		String passord1 = "#123Erikkk";
 		String passord2 = "feil";
 		String passord3 = "DetteErFeil";
 		String passord4 = "erik!!4455KK";
-		assertTrue(InputSjekk.passordSjekk(passord1));
 		assertFalse(InputSjekk.passordSjekk(passord2));
+		assertTrue(InputSjekk.passordSjekk(passord1));		
 		assertFalse(InputSjekk.passordSjekk(passord3));
 		assertTrue(InputSjekk.passordSjekk(passord4));
 	}
