@@ -5,11 +5,6 @@ class validator2 {
         this.root = root;
         this.run = this.run.bind(this);
         this.rootElement = document.getElementById(this.root);
-    }
-    
-    run(){
-         
-         root.querySelector("form")
          
          this.fornavn = this.rootElement.querySelector('input[id="fornavn"]');
          this.fornavn.addEventListener("input", fornavnSjekk);
@@ -24,21 +19,41 @@ class validator2 {
          this.passord.addEventListener("input", passordSjekk);
              
          this.passordRepetert = this.rootElement.querySelector('input[id="passordRepetert"]');
-         this.fornavn.addEventListener("input", passordLikt); 
+         this.passordRepetert.addEventListener("input", passordLikt); 
+         
+         this.feilmeldingboks = this.rootElement.querySelector('div[id="feilmeldingboks"]');
+         this.feilmeldingboks.addEventListener("click", sjekkSkjema);
+         
+         this.passordInfo = this.rootElement.querySelector('div[id="passordInfo"]');
+         this.passord.addEventListener("mouseover", musOver);
+         this.passord.addEventListener("mouseout", musUt);
+         
+         
+         
+       // this.kjonn = this.rootElement.querySelector('radio[id="kjonn"]');
+      //  this.kjonn.addEventListener("click", kjonnSjekk);
+         
+    }
+    
+    run(){        
+     
+        
     }
 }
 
 
 function fornavnSjekk(){
     if (fornavn.value.match("^[A-ZÆØÅ][A-Za-zÆØÅæøå\\-]{2,19}$")){
-        fornavn.style.borderColor = "green"
-        fornavn.classList.remove("formcontroller_invalidInput")
-        fornavn.classList.add("formcontroller_validInput")
+        
+        fornavn.classList.remove("formcontroller_redBorder")
+        fornavn.classList.add("formcontroller_greenBorder")
+     
         }
         else{
-         fornavn.style.borderColor = "red"  
-          fornavn.classList.remove("formcontroller_validInput")
-         fornavn.classList.add("formcontroller_invalidInput")
+         
+          fornavn.classList.remove("formcontroller_greenBorder")
+         fornavn.classList.add("formcontroller_redBorder")
+     
          
         }
   
@@ -46,45 +61,95 @@ function fornavnSjekk(){
 
 function etternavnSjekk(){
     if (etternavn.value.match("^[A-ZÆØÅ][A-Za-zÆØÅæøå\\-]{2,19}$")) {
-    etternavn.style.borderColor = "green";}
+        etternavn.classList.remove("formcontroller_redBorder")
+        etternavn.classList.add("formcontroller_greenBorder")  
+    }
     else{
-        etternavn.style.borderColor = "red"
+         etternavn.classList.remove("formcontroller_greenBorder")
+         etternavn.classList.add("formcontroller_redBorder")
     }
   
 }
 
 function mobilSjekk(){
     if (mobil.value.match("^[\\d]{8}$")) {
-    mobil.style.borderColor = "green"
+        mobil.classList.remove("formcontroller_redBorder")
+        mobil.classList.add("formcontroller_greenBorder")
     }else{
-        mobil.style.borderColor = "red"
+         mobil.classList.remove("formcontroller_greenBorder")
+         mobil.classList.add("formcontroller_redBorder")
     }
     console.log("mobil");
 }
 
 function passordSjekk(){
-   if (passord.value.match("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")) {
-    passord.style.borderColor = "green"
-    passord.style.backgroundColor= "lightgreen"
+   if (passord.value.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")){
+        passord.classList.remove("formcontroller_redBorder")
+        passord.classList.remove("formcontroller_yellowBorder")
+        passord.classList.add("formcontroller_greenBorder")  
+    }else if (passord.value.match("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")) {
+        passord.classList.remove("formcontroller_redBorder")
+        passord.classList.add("formcontroller_yellowBorder")
+ 
     }else{
-      passord.style.borderColor = "red" 
-      passord.style.backgroundColor= "pink"
+         passord.classList.remove("formcontroller_greenBorder")
+         passord.classList.add("formcontroller_redBorder")
     }
-    console.log("passord");
 }
 
 function passordLikt(){
    if (passordRepetert.value === passord.value){
-    passordRepetert.style.borderColor = "green"
+        passordRepetert.classList.remove("formcontroller_redBorder")
+        passordRepetert.classList.add("formcontroller_greenBorder")
     }else{
-        passordRepetert.style.borderColor = "red"
+         passordRepetert.classList.remove("formcontroller_greenBorder")
+         passordRepetert.classList.add("formcontroller_redBorder")
     }
     
 }
 
-function musOver(){
+function kjonnSjekk(){
+    
+}
 
-     
+function musOver(){
+     passordInfo.classList.remove("formcontroller_hidden")
+     passordInfo.innerHTML = "Passord må inneholde en stor bokstav, ett tall, ett tegn og må være minst 6 tegn"
+     console.log("mus inn")
+}
+
+function musUt(){
+     passordInfo.classList.add("formcontroller_hidden")
+     console.log("mus ut")
+}
+
+function sjekkSkjema(){
+    
+     var feilmelding = new String("");
+    
+    if (!fornavn.value.match("^[A-ZÆØÅ][A-Za-zÆØÅæøå\\-]{2,19}$")){
+       feilmelding += "Ugyldig fornavn \n"
+    }
+    if (!etternavn.value.match("^[A-ZÆØÅ][A-Za-zÆØÅæøå\\-]{2,19}$")){
+       feilmelding += "Ugyldig etternavn \n"
+    }
+    if (!mobil.value.match("^[\\d]{8}$")) {
+        feilmelding += "Ugyldig telefonnummer \n"
+    }
+    if (!passord.value.match("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")){
+        feilmelding += "Ugyldig passord \n"
+    }
+    if (!passordRepetert.value === passord.value){
+        feilmelding += "Passord er ikke likt"
+        }
+    if (feilmelding.length === 0){
+        console.log("submit gokjent")
+    }else{
+         console.log("stopper submit")
+         feilmeldingboks.classList.remove("formcontroller_hidden")
+         feilmeldingboks.innerHTML = feilmelding
+         event.preventDefault()
+    }
 }
 
  // const rootElement = document.getElementById("root")

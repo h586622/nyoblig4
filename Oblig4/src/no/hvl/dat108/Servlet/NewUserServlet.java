@@ -29,7 +29,7 @@ public class NewUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String fornavn = (String) request.getAttribute("fornavn");
+/*		String fornavn = (String) request.getAttribute("fornavn");
 		String etternavn = (String) request.getAttribute("etternavn");
 		String mobilnummerString = (String) request.getAttribute("mobilnummer");
 		String kjonn = (String) request.getAttribute("kjonn");
@@ -55,15 +55,16 @@ public class NewUserServlet extends HttpServlet {
 		if (!InputSjekk.passordSjekk(passord))
 			fpassord = "Passord er ikke sterkt nok";
 		
-		
-		request.setAttribute("ffornavn", ffornavn);
-		request.setAttribute("fetternavn", fetternavn);
-		request.setAttribute("fmobilnummer", fmobilnummer);
-		request.setAttribute("fkjonn", fkjonn);
-		request.setAttribute("fpassord", fpassord);
+		String feilmelding = ffornavn + "/n" +fetternavn + "/n" + fmobilnummer + "/n" + fpassord;
+	//	request.setAttribute("ffornavn", ffornavn);
+	//	request.setAttribute("fetternavn", fetternavn);
+	//	request.setAttribute("fmobilnummer", fmobilnummer);
+	//	request.setAttribute("fkjonn", fkjonn);
+	//	request.setAttribute("fpassord", fpassord);
+		request.setAttribute("feilelding", feilmelding);
 		}catch (NullPointerException e) {
 		
-		}
+		} */
 
 		request.getRequestDispatcher("WEB-INF/paameldingsskjema2.jsp").forward(request, response); 
 		
@@ -93,10 +94,10 @@ public class NewUserServlet extends HttpServlet {
 			Deltager ny = new Deltager(fornavn, etternavn, mobilnummer, kjonn, passord);
 			
 			
-			if (fornavn == "" || etternavn == "" || mobilnummerString == "" || nyttPassord == "" ) {  
+			if (!InputSjekk.navnSjekk(fornavn) || !InputSjekk.navnSjekk(etternavn) || !InputSjekk.nummerSjekk(mobilnummerString) || !InputSjekk.passordSjekk(nyttPassord) ) {  
 				request.getRequestDispatcher("WEB-INF/paameldingsskjema.jsp").forward(request, response);
 				System.out.println("sender tilbake til paamelding");
-			}
+			}else {
 
 			if (deltagerDAO.hentDeltager(mobilnummer) == null) {
 				deltagerDAO.lagreNyDeltager(ny);
@@ -125,7 +126,7 @@ public class NewUserServlet extends HttpServlet {
 				request.getRequestDispatcher(CONFIRM_URL).forward(request, response);
 			} else {
 				response.sendRedirect(LOGIN_URL);
-			}
+			}}
 		} catch (NumberFormatException e) {
 			request.getRequestDispatcher("WEB-INF/paameldingsskjema.jsp").forward(request, response);
 		}
