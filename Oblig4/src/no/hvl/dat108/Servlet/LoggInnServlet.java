@@ -55,7 +55,7 @@ public class LoggInnServlet extends HttpServlet {
 
 			Deltager d = deltagerDAO.hentDeltager(Integer.parseInt(mobil));
 
-			if (PH.validerMedSalt2(passord, d.getPassord().getSalt(), d.getPassord().getHash())) {
+			if (Passordhjelper.validerMedSalt2(passord, d.getPassord().getSalt(), d.getPassord().getHash())) {
 
 				bool = true;
 
@@ -74,6 +74,6 @@ public class LoggInnServlet extends HttpServlet {
 		} catch (NullPointerException | IllegalArgumentException e) {
 			response.sendRedirect(LOGIN_URL + "?invalidUsername");
 		}
-
+		
 	}
 } 

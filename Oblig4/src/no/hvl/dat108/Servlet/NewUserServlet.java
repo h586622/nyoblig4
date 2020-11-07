@@ -29,42 +29,7 @@ public class NewUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-/*		String fornavn = (String) request.getAttribute("fornavn");
-		String etternavn = (String) request.getAttribute("etternavn");
-		String mobilnummerString = (String) request.getAttribute("mobilnummer");
-		String kjonn = (String) request.getAttribute("kjonn");
-		String passord = (String) request.getAttribute("passord");
-		
-		try {
-		
-		
-		String ffornavn = "";
-		String fetternavn = "";
-		String fmobilnummer = "";
-		String fkjonn = "";
-		String fpassord = "";
 
-		if (!InputSjekk.navnSjekk(fornavn))
-			ffornavn = "Ugyldig fornavn";
-		if (!InputSjekk.navnSjekk(etternavn))
-			fetternavn = "Ugyldig etternavn";
-		if (!InputSjekk.nummerSjekk(mobilnummerString))
-			fmobilnummer = "Ugyldig telefonnummer";
-		if (kjonn == "")
-			fkjonn = "Du må velge kjønn";
-		if (!InputSjekk.passordSjekk(passord))
-			fpassord = "Passord er ikke sterkt nok";
-		
-		String feilmelding = ffornavn + "/n" +fetternavn + "/n" + fmobilnummer + "/n" + fpassord;
-	//	request.setAttribute("ffornavn", ffornavn);
-	//	request.setAttribute("fetternavn", fetternavn);
-	//	request.setAttribute("fmobilnummer", fmobilnummer);
-	//	request.setAttribute("fkjonn", fkjonn);
-	//	request.setAttribute("fpassord", fpassord);
-		request.setAttribute("feilelding", feilmelding);
-		}catch (NullPointerException e) {
-		
-		} */
 
 		request.getRequestDispatcher("WEB-INF/paameldingsskjema2.jsp").forward(request, response); 
 		
@@ -79,16 +44,16 @@ public class NewUserServlet extends HttpServlet {
 		try { //Denne Try catch er qucikfix, bør gjøre det kun med parseInten
 			
 			String fornavnESC = request.getParameter("fornavn");
-			String fornavn = org.apache.commons.text.StringEscapeUtils.escapeHtml4(fornavnESC);
+			String fornavn = InputSjekk.escapeHtml(fornavnESC);
 			String etternavnESC = request.getParameter("etternavn");
-			String etternavn = org.apache.commons.text.StringEscapeUtils.escapeHtml4(etternavnESC);
+			String etternavn = InputSjekk.escapeHtml(etternavnESC);
 			String mobilnummerStringESC = request.getParameter("mobil");
-			String mobilnummerString = org.apache.commons.text.StringEscapeUtils.escapeHtml4(mobilnummerStringESC);
+			String mobilnummerString = InputSjekk.escapeHtml(mobilnummerStringESC);
 			int mobilnummer = Integer.parseInt(mobilnummerString);
 			String nyttPassordESC = request.getParameter("passord");
-			String nyttPassord = org.apache.commons.text.StringEscapeUtils.escapeHtml4(nyttPassordESC);
-			String passordRepESC = request.getParameter("passordRep");
-			String passordRep = org.apache.commons.text.StringEscapeUtils.escapeHtml4(passordRepESC);
+			String nyttPassord = InputSjekk.escapeHtml(nyttPassordESC);
+			//String passordRepESC = request.getParameter("passordRep");
+			//String passordRep = InputSjekk.escapeHtml(passordRepESC);
 			String kjonn = request.getParameter("kjonn");
 			Passord passord = Passord.lagPassord(nyttPassord);
 			Deltager ny = new Deltager(fornavn, etternavn, mobilnummer, kjonn, passord);

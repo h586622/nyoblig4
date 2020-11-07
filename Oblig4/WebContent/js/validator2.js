@@ -52,9 +52,11 @@ function fornavnSjekk(){
         else{
          
           fornavn.classList.remove("formcontroller_greenBorder")
-         fornavn.classList.add("formcontroller_redBorder")
-     
-         
+         fornavn.classList.add("formcontroller_redBorder")         
+        }
+        if (fornavn.value.length === 0){
+           fornavn.classList.remove("formcontroller_greenBorder")
+           fornavn.classList.remove("formcontroller_redBorder")  
         }
   
 }
@@ -68,6 +70,10 @@ function etternavnSjekk(){
          etternavn.classList.remove("formcontroller_greenBorder")
          etternavn.classList.add("formcontroller_redBorder")
     }
+            if (etternavn.value.length === 0){
+           etternavn.classList.remove("formcontroller_greenBorder")
+           etternavn.classList.remove("formcontroller_redBorder")  
+        }
   
 }
 
@@ -79,6 +85,10 @@ function mobilSjekk(){
          mobil.classList.remove("formcontroller_greenBorder")
          mobil.classList.add("formcontroller_redBorder")
     }
+            if (mobil.value.length === 0){
+           mobil.classList.remove("formcontroller_greenBorder")
+           mobil.classList.remove("formcontroller_redBorder")  
+        }
     console.log("mobil");
 }
 
@@ -95,6 +105,11 @@ function passordSjekk(){
          passord.classList.remove("formcontroller_greenBorder")
          passord.classList.add("formcontroller_redBorder")
     }
+     if (passord.value.length === 0){
+           passord.classList.remove("formcontroller_greenBorder")
+           passord.classList.remove("formcontroller_redBorder")  
+           passord.classList.remove("formcontroller_yellowBorder") 
+        }
 }
 
 function passordLikt(){
@@ -105,6 +120,10 @@ function passordLikt(){
          passordRepetert.classList.remove("formcontroller_greenBorder")
          passordRepetert.classList.add("formcontroller_redBorder")
     }
+            if (passordRepetert.value.length === 0){
+           passordRepetert.classList.remove("formcontroller_greenBorder")
+           passordRepetert.classList.remove("formcontroller_redBorder")  
+        }
     
 }
 

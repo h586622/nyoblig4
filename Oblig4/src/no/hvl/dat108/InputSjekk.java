@@ -16,7 +16,15 @@ public class InputSjekk {
 	
     	String pattern = "^(?=.*[0-9])(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*[!@#$%&^+=]).{6,20}$";
     	return passord.matches(pattern);
-
+    }
+    
+    public static String escapeHtml(String s) { 
+        String resultat = s;
+        resultat = resultat.replaceAll("<", "&lt;");
+        resultat = resultat.replaceAll("<", "&gt;");
+        resultat = resultat.replaceAll("\"", "&qut;");
+        
+        return resultat;
     }
 	
 }
