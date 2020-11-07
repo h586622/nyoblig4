@@ -16,11 +16,11 @@ public class DeltagerDAO {
 		return em.createQuery("SELECT d FROM Deltager d", Deltager.class).getResultList();
 	}
 	
-	public Deltager hentDeltager(int mobilnummer) {
+	public synchronized Deltager hentDeltager(int mobilnummer) {
 		return em.find(Deltager.class, mobilnummer);
 	}
 
-	public void lagreNyDeltager(Deltager nyDeltager) {
+	public synchronized void lagreNyDeltager(Deltager nyDeltager) {
 		em.persist(nyDeltager);
 	}
 }

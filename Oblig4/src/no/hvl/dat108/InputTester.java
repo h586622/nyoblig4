@@ -34,10 +34,12 @@ class InputTester {
 		String passord2 = "feil";
 		String passord3 = "DetteErFeil";
 		String passord4 = "erik!!4455KK";
+		String passord5 = "!Ææ123456";
 		assertFalse(InputSjekk.passordSjekk(passord2));
 		assertTrue(InputSjekk.passordSjekk(passord1));		
 		assertFalse(InputSjekk.passordSjekk(passord3));
 		assertTrue(InputSjekk.passordSjekk(passord4));
+		assertTrue(InputSjekk.passordSjekk(passord5));
 	}
 
 }
