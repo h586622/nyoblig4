@@ -69,6 +69,8 @@ public class LoggInnServlet extends HttpServlet {
 				sesjon.setAttribute("mobil", mobil);
 
 				response.sendRedirect("deltagerliste");
+			}else {
+				response.sendRedirect(LOGIN_URL + "?invalidUsername");
 			}
 
 		} catch (NullPointerException | IllegalArgumentException e) {
